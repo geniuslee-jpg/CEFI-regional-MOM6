@@ -11,13 +11,14 @@ EA12 OBC 생성: GLORYS 연간 파일 → MOM6 경계조건 파일
   cd /data01/labdisk/sungjin/MOM6-COBALT
   python tools/boundary/write_ea12_obc.py --config tools/boundary/ea12_obc.yaml
 """
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from subprocess import run
 from os import path
 import xarray
 import yaml
 from boundary import Segment
 import argparse
-import os
 
 import warnings
 warnings.filterwarnings('ignore')
