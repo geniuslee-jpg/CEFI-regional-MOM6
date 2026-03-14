@@ -1,0 +1,6 @@
+! EA12 physics-only test overrides
+! To enable COBALT later, change USE_generic_tracer to True
+#override USE_generic_tracer = False
+#override GENERIC_TRACER_IC_FILE = ""
+#override RESTART_CHECKSUMS_REQUIRED = False
+#override TRACERS_MAY_REINIT = True
