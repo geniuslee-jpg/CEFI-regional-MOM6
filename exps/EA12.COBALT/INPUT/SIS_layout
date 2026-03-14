@@ -1,3 +1,4 @@
 #override LAYOUT = 10,10
 #override IO_LAYOUT = 1,1
-#override MASKTABLE = MOM_mask_table
+! EA12: mask_table disabled until regenerated for EA12 grid (660x444)
+!#override MASKTABLE = MOM_mask_table

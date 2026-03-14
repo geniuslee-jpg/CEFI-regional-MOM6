@@ -1,3 +1,5 @@
 #override IO_LAYOUT = 1,1
 #override LAYOUT    = 10,10
-#override MASKTABLE = MOM_mask_table
+! EA12: mask_table disabled until regenerated for EA12 grid (660x444)
+! To regenerate: use check_mask tool with ocean_topog.nc and LAYOUT=10,10
+!#override MASKTABLE = MOM_mask_table

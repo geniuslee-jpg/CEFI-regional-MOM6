@@ -285,7 +285,21 @@ PYTHONPATH=cefi_ref/CEFI-regional-MOM6/tools/boundary \
   python tools/boundary/write_ea12_obc.py --config tools/boundary/ea12_obc.yaml
 ```
 
-### 6.5 의존성
+### 6.5 OBC 파일 심볼릭 링크 생성
+`write_ea12_obc.py`는 연도 접미사가 포함된 파일명(`thetao_001_1993.nc`)을 생성하지만,
+MOM_input은 접미사 없는 파일명(`thetao_001.nc`)을 참조합니다.
+OBC 생성 후 반드시 심볼릭 링크를 생성해야 합니다:
+
+```bash
+cd /data01/labdisk/sungjin/MOM6-COBALT/exps/EA12.COBALT/INPUT
+for var in thetao so zos uv; do
+  for seg in 001 002 003; do
+    ln -sf "${var}_${seg}_1993.nc" "${var}_${seg}.nc"
+  done
+done
+```
+
+### 6.6 의존성
 - `xesmf`: 수평 내삽 (`conda install -c conda-forge xesmf`)
 - `boundary.py`: CEFI 레포의 Segment 클래스 (변경 불필요)
 
@@ -449,9 +463,42 @@ mpirun -np 100 /data01/labdisk/sungjin/COBART_TEST/CEFI-regional-MOM6/builds/bui
 - **문제**: CEFI 레포의 ESM4/CO2/SeaWiFS가 `datasets/` 심볼릭 링크 → 실제 데이터 없음
 - **해결**: NWA12 데이터셋(51GB) FTP 다운로드
 
+### 11.6 boundary.py import 오류 (ModuleNotFoundError)
+- **문제**: `write_ea12_obc.py` 실행 시 `from boundary import Segment` 실패
+- **원인**: `tools/boundary/boundary.py`가 로컬에 없고 cefi_ref에만 존재
+- **해결**: 심볼릭 링크 생성
+  ```bash
+  ln -s cefi_ref/CEFI-regional-MOM6/tools/boundary/boundary.py tools/boundary/boundary.py
+  ```
+
+### 11.7 MOM_mask_table이 EA12 격자에 맞지 않음
+- **문제**: NWA12용 mask_table을 EA12(660×444)에 사용하면 오류 발생
+- **해결**: MOM_layout과 SIS_layout에서 MASKTABLE 비활성화 (mask_table 없이도 실행 가능, 단 모든 100개 프로세스가 계산 수행)
+- **최적화**: EA12 격자에 맞는 mask_table 재생성 시 육지 타일 제외 가능 → 프로세스 효율 향상
+
 ---
 
-## 12. 참고 자료
+## 12. 설정 리뷰 체크리스트
+
+물리 테스트 실행 전 확인 사항:
+
+| # | 항목 | 상태 |
+|---|------|------|
+| 1 | OBC 파일 심볼릭 링크 (6.5절) | 수동 실행 필요 |
+| 2 | diag_table 진단 출력 정의 | 추가 완료 |
+| 3 | MOM_mask_table 비활성화 | 완료 |
+| 4 | VELOCITY_FILE 존재 확인 | 서버에서 확인 필요 |
+| 5 | 격자 파일 (ocean_hgrid.nc 등) | 서버에서 확인 필요 |
+| 6 | ERA5 대기강제력 파일 | 다운로드/후처리 대기 중 |
+
+COBALT 활성화 시 추가 필요:
+- field_table에 COBALT OBC 정의 (NWA12 참고)
+- input.nml에서 `do_generic_COBALT=.true.`
+- MOM_override에서 `USE_generic_tracer = True`
+
+---
+
+## 13. 참고 자료
 
 - CEFI-regional-MOM6: https://github.com/NOAA-GFDL/CEFI-regional-MOM6
 - CEFI 사용자 가이드: https://cefi-regional-mom6.readthedocs.io/
