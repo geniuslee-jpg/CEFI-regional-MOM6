@@ -91,7 +91,7 @@ echo ""
 echo "--- Step 5: Open boundary conditions ---"
 if [ ! -f "$INPUTDIR/uv_001.nc" ]; then
     cd "$BASEDIR"
-    PYTHONPATH="$CEFI_REF/tools/boundary" \
+    PYTHONPATH="$TOOLDIR/boundary:$CEFI_REF/tools/boundary" \
         python3 "$TOOLDIR/boundary/write_ea12_obc.py" \
         --config "$TOOLDIR/boundary/ea12_obc.yaml"
     echo "[OK] OBC files generated"
