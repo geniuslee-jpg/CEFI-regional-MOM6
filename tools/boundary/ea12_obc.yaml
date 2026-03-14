@@ -1,0 +1,19 @@
+first_year: 1993
+last_year: 1993
+glorys_dir: '/data01/labdisk/sungjin/MOM6-COBALT/input/ocean_ic_bc/glorys12'
+glorys_pattern: 'glorys12_EAS_wide_{year}.nc'
+output_dir: '/data01/labdisk/sungjin/MOM6-COBALT/exps/EA12.COBALT/INPUT'
+hgrid: '/data01/labdisk/sungjin/MOM6-COBALT/exps/EA12.COBALT/INPUT/ocean_hgrid.nc'
+ncrcat_years: false
+segments:
+  - id: 1
+    border: 'south'
+  - id: 2
+    border: 'north'
+  - id: 3
+    border: 'east'
+variables:
+  - 'thetao'
+  - 'so'
+  - 'zos'
+  - 'uv'
