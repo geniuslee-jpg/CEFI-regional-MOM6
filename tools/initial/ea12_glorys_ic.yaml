@@ -4,7 +4,7 @@
 glorys_file: /data01/labdisk/sungjin/MOM6-COBALT/input/ocean_ic_bc/glorys12/glorys12_EAS_wide_1993.nc
 vgrid_file: /data01/labdisk/sungjin/MOM6-COBALT/exps/EA12.COBALT/INPUT/vgrid_75_2m.nc
 grid_file: /data01/labdisk/sungjin/MOM6-COBALT/exps/EA12.COBALT/INPUT/ocean_hgrid.nc
-output_file: /data01/labdisk/sungjin/MOM6-COBALT/exps/EA12.COBALT/INPUT/MOM.res.nc
+output_file: /data01/labdisk/sungjin/MOM6-COBALT/exps/EA12.COBALT/INPUT/glorys_ic_1993-01-01.nc
 reuse_weights: False
 
 variable_names:

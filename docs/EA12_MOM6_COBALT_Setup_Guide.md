@@ -218,11 +218,14 @@ python tools/grid/create_ea12_grid.py
 
 ## 5. 초기조건 생성
 
-### 5.1 물리 초기조건 (MOM.res.nc)
-스크립트: `tools/initial/write_ea12_initial.py`
+### 5.1 물리 초기조건 (glorys_ic_1993-01-01.nc)
+스크립트: `tools/initial/write_glorys_initial.py --config_file ea12_glorys_ic.yaml`
 
-**입력:** `glorys12_EAS_1993.nc` (GLORYS12, 1993년 1월 1일)
-**출력:** `exps/EA12.COBALT/INPUT/MOM.res.nc`
+**입력:** `glorys12_EAS_wide_1993.nc` (GLORYS12, 1993년 1월 1일)
+**출력:** `exps/EA12.COBALT/INPUT/glorys_ic_1993-01-01.nc`
+
+> **주의:** 이전에 `MOM.res.nc`로 출력했다면, MOM_input이 `glorys_ic_1993-01-01.nc`를 참조하므로
+> 재생성하거나 심볼릭 링크 생성 필요: `ln -sf MOM.res.nc glorys_ic_1993-01-01.nc`
 
 **처리 과정:**
 1. GLORYS 1월 1일 데이터 추출
