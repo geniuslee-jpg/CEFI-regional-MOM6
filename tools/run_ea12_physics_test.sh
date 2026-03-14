@@ -18,7 +18,7 @@ BASEDIR="/data01/labdisk/sungjin/MOM6-COBALT"
 EXPDIR="$BASEDIR/exps/EA12.COBALT"
 INPUTDIR="$EXPDIR/INPUT"
 TOOLDIR="$BASEDIR/tools"
-CEFI_REF="$BASEDIR/cefi_ref/CEFI-regional-MOM6"
+CEFI_REF="$BASEDIR/cefi_ref"
 
 echo "============================================"
 echo " EA12 Physics-Only Test Setup"
